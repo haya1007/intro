@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>自己紹介サイト</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="avatar">
-      <img src="./haya1007icon3.jpg" alt="アイコン" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自己紹介サイト</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEcfEDIHGnY9lRu7GqrBYXVUvXNw5dmajnbHpJjoRtK6mguuHwGrKTbz" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="terminal.css" /> </head>
+<body class="bg-secondary text-light d-flex align-items-center justify-content-center vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 text-center">
+                <div class="avatar mb-3">
+                    <img src="./icon.jpg" alt="アイコン" class="img-fluid rounded-circle border border-5 border-info" style="width: 140px; height: 140px; object-fit: cover;">
+                </div>
+                <h1 class="mb-3" style="color: #d4edda;">haya1007</h1>
+                <div class="intro-sections mb-4">
+                    <div id="terminal-container" class="mt-4">
+                      <div id="terminal-output"></div>
+                      <div class="terminal-prompt">
+                          <span class="prompt-text">guest@haya1007:~$</span>
+                          <input type="text" id="terminal-input" autofocus>
+                      </div>
+                  </div>
+                <div class="social-icons">
+                    <a href="https://github.com/haya1007" target="_blank" class="me-3">
+                        <img src="github.png" alt="GitHub" class="social-img rounded-circle bg-light p-1 shadow" style="width: 50px; height: 50px; object-fit: contain; transition: transform 0.2s;">
+                    </a>
+                    <a href="https://x.com/pippipipiip" target="_blank" class="me-3">
+                        <img src="x.png" alt="X" class="social-img rounded-circle bg-light p-1 shadow" style="width: 50px; height: 50px; object-fit: contain; transition: transform 0.2s;">
+                    </a>
+                    <a href="https://www.youtube.com/@ekko-hy" target="_blank">
+                        <img src="youtube.png" alt="YouTube" class="social-img rounded-circle bg-light p-1 shadow" style="width: 50px; height: 50px; object-fit: contain; transition: transform 0.2s;">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <h1>haya1007</h1>
-    <div class="intro-sections">
-      <div class="section"><strong>やってるゲーム：</strong> LOL, 音ゲー, EFT, 寿司打</div>
-    </div>
-    <div class="social-icons">
-        <a href="https://github.com/haya1007" target="_blank">
-          <img src="github.png" alt="GitHub" class="social-img" />
-        </a>
-        <a href="https://x.com/pippipipiip" target="_blank">
-          <img src="x.png" alt="X" class="social-img" />
-        </a>
-        <a href="https://www.youtube.com/@ekko-hy" target="_blank">
-          <img src="youtube.png" alt="YouTube" class="social-img" />
-        </a>
-      </div>
-  </div>
-  <script src="script.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="script.js"></script> </body>
 </html>
