@@ -3,30 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>自己紹介サイト</title>
+  <title>haya1007.com</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="container">
-    <div class="avatar">
-      <img src="./haya1007icon3.jpg" alt="アイコン" />
+<body class="bg-dark text-light">
+  <div class="container py-5">
+    <div class="text-center mb-4">
+      <img src="./icon.jpg" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px;" alt="アイコン" />
+      <h1 class="mt-3">haya1007</h1>
+      <p class="lead">ちょっとインフラエンジニア / ゲーマー</p>
     </div>
-    <h1>haya1007</h1>
-    <div class="intro-sections">
-      <div class="section"><strong>やってるゲーム：</strong> LOL, 音ゲー, EFT, 寿司打</div>
+
+    <div class="text-center mb-5">
+      <a href="https://github.com/haya1007" target="_blank" class="btn btn-outline-light mx-2">
+        <img src="github.png" alt="GitHub" class="social-img" style="width: 24px; height: 24px;"> GitHub
+      </a>
+      <a href="https://x.com/pippipipiip" target="_blank" class="btn btn-outline-light mx-2">
+        <img src="x.png" alt="X" class="social-img" style="width: 24px; height: 24px;"> X
+      </a>
+      <a href="https://www.youtube.com/@ekko-hy" target="_blank" class="btn btn-outline-light mx-2">
+        <img src="youtube.png" alt="YouTube" class="social-img" style="width: 24px; height: 24px;"> YouTube
+      </a>
     </div>
-    <div class="social-icons">
-        <a href="https://github.com/haya1007" target="_blank">
-          <img src="github.png" alt="GitHub" class="social-img" />
-        </a>
-        <a href="https://x.com/pippipipiip" target="_blank">
-          <img src="x.png" alt="X" class="social-img" />
-        </a>
-        <a href="https://www.youtube.com/@ekko-hy" target="_blank">
-          <img src="youtube.png" alt="YouTube" class="social-img" />
-        </a>
+
+
+    <p>helpコマンド入力してみて！</p>
+    <div class="terminal bg-black p-3 rounded shadow" style="font-family: monospace; color: #33FF33;">
+      <div class="terminal-header d-flex align-items-center mb-3">
+
       </div>
+    
+      <div id="console-output" class="mb-2" style="min-height: 200px; white-space: pre-wrap; text-align: left;"></div>
+    
+      <div class="d-flex align-items-center">
+        <span style="color: #33FF33;">$</span>&nbsp;
+        <div id="console-line" contenteditable="true" class="flex-grow-1" style="outline: none; background: transparent; color: #33FF33;"></div>
+      </div>
+    </div>
+    
   </div>
-  <script src="script.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module"src="main.js"></script>
 </body>
 </html>
