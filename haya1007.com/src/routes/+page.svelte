@@ -5,7 +5,7 @@
     import emblaCarouselSvelte from 'embla-carousel-svelte';
     import Autoplay from 'embla-carousel-autoplay'
 
-    let options = { loop: true }
+    let options = { loop: true, dragFree: false }
     let plugins = [Autoplay({delay: 3000})]
 </script>
 
