@@ -1,32 +1,5 @@
 <script lang="ts">
     import data from '$lib/assets/global-nav.json';
-
-    const images = [
-        {
-            path: '/images/first-view/1.jpg',
-            text: '背景',
-        },
-        {
-            path: '/images/first-view/2.jpg',
-            text: '背景',
-        },
-        {
-            path: '/images/first-view/3.jpg',
-            text: '背景',
-        },
-        {
-            path: '/images/first-view/4.jpg',
-            text: '背景',
-        },
-        {
-            path: '/images/first-view/5.jpg',
-            text: '背景',
-        },
-        {
-            path: '/images/first-view/6.jpg',
-            text: '背景',
-        },
-    ];
 </script>
 
 <main>
