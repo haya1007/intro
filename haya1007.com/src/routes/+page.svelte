@@ -9,13 +9,18 @@
     let plugins = [Autoplay({delay: 3000})]
 </script>
 
+<svelte:head>
+  <title>haya1007's Portfolio</title>
+  <meta name="description" content="haya1007の簡易ポートフォリオです。" />
+</svelte:head>
+
 <main>
     <div class="first-view">
         <!-- <img src="/images/haikei.jpg" alt=""> -->
         <div class="embla" use:emblaCarouselSvelte="{{ options, plugins }}">
             <div class="embla__container">
                 {#each images as image}
-                    <div class="embla__slide"><img src={image.path} alt={image.text}></div>
+                    <div class="embla__slide"><a href={image.map} target="_blank"><img src={image.path} alt={image.text}></a></div>
                 {/each}
             </div>
         </div>

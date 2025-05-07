@@ -21,7 +21,7 @@
                 <nav class="sns">
                     <ul>
                         {#each sns as item}
-                        <li><a href={item.href}><img class="hover" src={item.path} alt={item.service}></a></li>
+                        <li><a href={item.href} target="_blank"><img class="hover" src={item.path} alt={item.service}></a></li>
                         {/each}
                     </ul>
                 </nav>
