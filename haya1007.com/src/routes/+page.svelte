@@ -1,10 +1,24 @@
 <script lang="ts">
     import data from '$lib/assets/global-nav.json';
+    import images from '$lib/assets/first-view.json';
+
+    import emblaCarouselSvelte from 'embla-carousel-svelte';
+    import Autoplay from 'embla-carousel-autoplay'
+
+    let options = { loop: true }
+    let plugins = [Autoplay({delay: 3000})]
 </script>
 
 <main>
     <div class="first-view">
-        <img src="/images/haikei.jpg" alt="">
+        <!-- <img src="/images/haikei.jpg" alt=""> -->
+        <div class="embla" use:emblaCarouselSvelte="{{ options, plugins }}">
+            <div class="embla__container">
+                {#each images as image}
+                    <div class="embla__slide"><img src={image.path} alt={image.text}></div>
+                {/each}
+            </div>
+        </div>
     </div>
 
     <div class="base">

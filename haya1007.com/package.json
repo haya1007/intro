@@ -23,6 +23,7 @@
 	},
 	"dependencies": {
 		"@sveltejs/adapter-static": "^3.0.8",
-		"svelte-carousel": "^1.0.25"
+		"embla-carousel-autoplay": "^8.6.0",
+		"embla-carousel-svelte": "^8.6.0"
 	}
 }
