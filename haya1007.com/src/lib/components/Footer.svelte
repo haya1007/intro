@@ -1,5 +1,6 @@
 <script lang="ts">
     import data from "$lib/assets/global-nav.json"
+    import sns from "$lib/assets/sns-nav.json"
 </script>
 
 <footer>
@@ -19,9 +20,9 @@
                 
                 <nav class="sns">
                     <ul>
-                        <li><img class="hover" src="/images/sns/youtube.svg" alt="YouTube"></li>
-                        <li><img class="hover" src="/images/sns/x.svg" alt="X"></li>
-                        <li><img class="hover" src="/images/sns/github.svg" alt="GitHub"></li>
+                        {#each sns as item}
+                        <li><a href={item.href} target="_blank"><img class="hover" src={item.path} alt={item.service}></a></li>
+                        {/each}
                     </ul>
                 </nav>
             </div>

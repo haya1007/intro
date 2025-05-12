@@ -12,9 +12,11 @@ html {
 .hover {
     opacity: 1;
     transition: all 0.1s;
+    font-weight: normal;
 
     &:hover {
         opacity: 0.8;
+        font-weight: bold;
     }
 }
 
@@ -40,4 +42,17 @@ html {
 .hover-line:hover::after {
     transform-origin: left top;
     transform: scale(1, 1);
+}
+
+.embla {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+}
+
+.embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
 }

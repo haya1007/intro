@@ -13,10 +13,5 @@
         "href": "/blog",
         "text": "blog",
         "description": "備忘録です。"
-    },
-    {
-        "href": "/contact",
-        "text": "contact",
-        "description": "連絡先です。"
     }
 ]

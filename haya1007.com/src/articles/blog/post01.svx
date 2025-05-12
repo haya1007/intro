@@ -1,0 +1,45 @@
+---
+title: Post 01
+date: '2023-01-01'
+image: '/images/haikei.jpg'
+---
+
+# aiueo1
+## unti
+### tntn
+```
+Hello World!
+unti
+tntn
+```
+これは`unti`**です**  
+<u>~~t<mark>ntn</mark>tntntn~~</u>
+
+* a
+* b
+* c
+    * d
+    * e
+
+1. a
+1. b
+1. c
+
+<img src="https://docbase.io/logo.png" alt="" width="80%" class="image_c">
+
+[寿司 - Wikipedia](http://ja.wikipedia.org/wiki/%E5%AF%BF%E5%8F%B8)
+
+> 引用要用  
+> あいあいあいあ  
+> > うううううう  
+
+うんち
+
+| Left align | Right align | Center align |
+|:----------:|:-----------:|:------------:|
+| This       | This        | This         |
+| column     | column      | column       |
+| will       | will        | will         |
+| be         | be          | be           |
+| left       | right       | center       |
+| aligned    | aligned     | aligned      |
