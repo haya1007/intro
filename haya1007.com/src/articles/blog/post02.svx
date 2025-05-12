@@ -1,0 +1,9 @@
+---
+title: Post 02
+date: '2023-01-01'
+image: '/images/haikei.jpg'
+---
+
+# aiueo2
+## unti
+### tntn

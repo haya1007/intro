@@ -35,8 +35,8 @@
                         <img src="/images/haikei.jpg" alt="" />
                         <p>{item.description}</p>
                     </div>
-                    <div class="button">
-                        <a class="hover" href={item.href}>view all</a>
+                    <div class="button hover">
+                        <a href={item.href}>view all</a>
                     </div>
                 </div>
             {/each}
