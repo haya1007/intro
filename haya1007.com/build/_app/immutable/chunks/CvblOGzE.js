@@ -1,0 +1,1 @@
+import"./CWj6FrbW.js";import"./69_IOA4Y.js";import{S as e}from"./D9nknU7L.js";import{t as o,a as i}from"./ByuwxW3Q.js";const m={title:"Post 04",date:"2023-01-01",image:"/images/haikei.jpg"},{title:d,date:f,image:g}=m;var r=o("<h1>aiueo3</h1> <h2>unti</h2> <h3>tntn</h3>",1);function l(t){var a=r();e(4),i(t,a)}export{l as default,m as metadata};
