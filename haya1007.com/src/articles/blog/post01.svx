@@ -1,45 +1,14 @@
 ---
-title: Post 01
-date: '2023-01-01'
-image: '/images/haikei.jpg'
+title: sudoグループに所属するユーザーを作る
+date: '2025-04-27'
+image: '/images/posts/no_image.png'
 ---
 
-# aiueo1
-## unti
-### tntn
+CentOS Stream9で、新規ユーザーを作成してsudo権限を付与する。
 ```
-Hello World!
-unti
-tntn
+adduser <ユーザー名>
+
+passwd <ユーザー名>
+
+sudo gpasswd -a <ユーザー名> wheel
 ```
-これは`unti`**です**  
-<u>~~t<mark>ntn</mark>tntntn~~</u>
-
-* a
-* b
-* c
-    * d
-    * e
-
-1. a
-1. b
-1. c
-
-<img src="https://docbase.io/logo.png" alt="" width="80%" class="image_c">
-
-[寿司 - Wikipedia](http://ja.wikipedia.org/wiki/%E5%AF%BF%E5%8F%B8)
-
-> 引用要用  
-> あいあいあいあ  
-> > うううううう  
-
-うんち
-
-| Left align | Right align | Center align |
-|:----------:|:-----------:|:------------:|
-| This       | This        | This         |
-| column     | column      | column       |
-| will       | will        | will         |
-| be         | be          | be           |
-| left       | right       | center       |
-| aligned    | aligned     | aligned      |

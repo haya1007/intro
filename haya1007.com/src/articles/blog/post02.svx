@@ -1,9 +1,198 @@
 ---
-title: Post 02
-date: '2023-01-01'
-image: '/images/haikei.jpg'
+title: BINDを使ったDNSサーバーの作成
+date: '2025-04-27'
+image: '/images/posts/post2.png'
 ---
 
-# aiueo2
-## unti
-### tntn
+CentOS Stream 9 でローカル内の名前解決をできるようにするDNSサーバーを建てる。<br>
+
+## アドレス
+
+| サーバー種 | IPアドレス | FQDN |
+| ---- | ---- | ---- |
+| DGW | 192.168.1.0 |   |
+| DNS | 192.168.1.10 | dns.haya1007.com |
+| WEB | 192.168.1.20 | web.haya1007.com |
+
+<br>
+
+## BINDのインストール
+```
+sudo dnf install bind bind-chroot
+```
+bind-chrootは/etc/named/chrootをルート「/」にすることで、BINDを侵害されてもアクセスを制限できる。
+<br>
+BINDの設定は「/etc/named.conf」で行い、ゾーンファイルを「/var/named/」に作る。
+<br>
+
+### /etc/named.confの設定
+```
+//
+// named.conf
+//
+// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+// server as a caching only nameserver (as a localhost DNS resolver only).
+//
+// See /usr/share/doc/bind*/sample/ for example named configuration files.
+//
+
+options {
+        listen-on port 53 { 127.0.0.1; 192.168.1.10; 192.168.1.0; };
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        secroots-file   "/var/named/data/named.secroots";
+        recursing-file  "/var/named/data/named.recursing";
+        allow-query     { 192.168.1.0/24; };
+
+        /*
+         - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
+         - If you are building a RECURSIVE (caching) DNS server, you need to enable
+           recursion.
+         - If your recursive DNS server has a public IP address, you MUST enable access
+           control to limit queries to your legitimate users. Failing to do so will
+           cause your server to become part of large scale DNS amplification
+           attacks. Implementing BCP38 within your network would greatly
+           reduce such attack surface
+        */
+        recursion yes;</code>
+
+        dnssec-validation yes;
+
+        managed-keys-directory "/var/named/dynamic";
+        geoip-directory "/usr/share/GeoIP";
+
+        pid-file "/run/named/named.pid";
+        session-keyfile "/run/named/session.key";
+
+        /* https://fedoraproject.org/wiki/Changes/CryptoPolicy */
+        include "/etc/crypto-policies/back-ends/bind.config";
+};
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+                                                                                                                             
+zone "." IN {                                                                                                                
+        type hint;                                                                                                           
+        file "named.ca";                                                                                                     
+};                                                                                                                           
+                                                                                                                             
+zone "haya1007.com" IN {                                                                                                     
+        type master;                                                                                                         
+        file "forward.example.com";                                                                                         
+        allow-update { none; };                                                                                              
+};                                                                                                                           
+                                                                                                                             
+zone "1.168.192.in-addr.arpa" IN {                                                                                           
+        type master;                                                                                                         
+        file "reverse.192.168.1";                                                                                            
+        allow-update { none; };                                                                                              
+};                                                                                                                           
+                                                                                                                             
+                                                                                                                             
+                                                                                                                             
+include "/etc/named.rfc1912.zones";                                                                                          
+include "/etc/named.root.key"; </code></pre>
+```
+<br>
+
+### /var/named/forward.example.com
+```
+$TTL    86400
+@       IN      SOA     dns.example.com. root.example.com. (
+                                        2025042701 ; serial
+                                        3600       ; refresh
+                                        900        ; retry
+                                        604800     ; expire
+                                        86400 )    ; minimum
+        IN      NS      dns.example.com.
+dns     IN      A       192.168.1.10
+web     IN      A       192.168.1.20
+```
+
+<br>
+
+### /var/named/reverse.192.168.1
+```
+$TTL    86400
+@       IN      SOA     dns.example.com. root.example.com. (
+                                        2025042701 ; serial
+                                        3600       ; refresh
+                                        900        ; retry
+                                        604800     ; expire
+                                        86400 )    ; minimum
+        IN      NS      dns.example.com.
+10      IN      PTR     dns.example.com.
+20      IN      PTR     web.example.com.
+```
+
+<br>
+
+## 設定の確認とBINDの起動
+### 設定の確認
+```
+# named.confの確認
+sudo named-checkconf /etc/named.conf
+
+# forward.haya1007.comとreverse.192.168.1の確認
+sudo named-checkzone example.com /var/named/forward.example.com
+sudo named-checkzone 1.168.192.in-addr.arpa /var/named/reverse.192.168.1
+```
+※エラーが出たら修正する。<br>
+```
+sudo chown named:named /var/named/forward.example.com
+sudo chown named:named /var/named/reverse.192.168.1
+sudo chmod 640 /var/named/forward.example.com
+sudo chmod 640 /var/named/reverse.192.168.1
+```
+
+<br>
+
+### BINDの起動
+```
+sudo systemctl enable --now named-chroot
+```
+```
+sudo systemctl status named-chroot
+```
+もしrunningじゃなかったら、エラーを見て確認する。
+<br>
+
+
+### firewalldの設定
+```
+vim /etc/resolv.conf
+```
+```
+# Generated by NetworkManager
+nameserver 192.168.3.10
+domain example.com
+```
+
+<br>
+
+## Windowsの設定（ホストPC）
+WindowsでDNSサーバーを設定する方法
+<br>
+
+・コントロールパネル→ネットワークとインターネット→ネットワークと共有センター
+
+で、自身のNWのプロパティを開く
+<br>
+
+・インターネットプロトコルバージョン4 (TCP/IPv4)のプロパティを開き、優先DNSに192.168.1.10を設定する。
+
+コマンドプロンプトで
+```
+nslookup web.example.com
+```
+で192.168.1.20が返ってくることを確認。
+<br>
+
+もし返ってこない場合、IPv6が有効になっていたり、Windows Defenderのファイヤーウォールで53番ポートとのやり取りが禁止されている可能性がある。
