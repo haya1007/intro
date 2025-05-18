@@ -1,1 +1,0 @@
-const t=[{href:"/works",text:"works",description:"過去の実績です。"},{href:"/about",text:"about",description:"私の紹介です。"},{href:"/blog",text:"blog",description:"備忘録です。"}];export{t as d};
