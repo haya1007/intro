@@ -1,0 +1,34 @@
+name: CI - Build Svelte App
+
+on:
+  push:
+    branches:
+      - develop-svelte
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Node.js をセットアップ
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.0'
+
+      # @sveltejs/adapter-static をインストール
+      - name: Install adapter-static
+        run: npm install @sveltejs/adapter-static
+
+      # @splidejs/svelte-splide をインストール
+      - name: Install svelte-splide
+        run: npm install @splidejs/svelte-splide
+
+      # ビルドコマンドを実行
+      - name: Build Svelte App
+        run: npm run build
