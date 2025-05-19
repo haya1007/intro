@@ -6,27 +6,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
 		
-		<link href="../_app/immutable/assets/0.iAhW6_v3.css" rel="stylesheet">
-		<link href="../_app/immutable/assets/5.CIQj84rK.css" rel="stylesheet">
-		<link rel="modulepreload" href="../_app/immutable/entry/start.BEa03S2O.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/S307v1Cn.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/SWu5V7ta.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/DIeogL5L.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/CYgJF_JY.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/Bw2Lo1XO.js">
-		<link rel="modulepreload" href="../_app/immutable/entry/app.C8bKKVH4.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/21pSE9mY.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/C5Z4FKd1.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/DmA_CMWa.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/CWj6FrbW.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/C5XtRKzK.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/0.BhNARJ_G.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/69_IOA4Y.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/DuACExjB.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/DOGHnPB-.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/NmhfbsVq.js">
-		<link rel="modulepreload" href="../_app/immutable/nodes/5.ByWbaATj.js">
-		<link rel="modulepreload" href="../_app/immutable/chunks/CwwknbQU.js">
+		<link href="../../_app/immutable/assets/0.iAhW6_v3.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/5.CIQj84rK.css" rel="stylesheet">
+		<link rel="modulepreload" href="../../_app/immutable/entry/start.QmNW6_lw.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C6lLcH1x.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/SWu5V7ta.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DIeogL5L.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CYgJF_JY.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/Bw2Lo1XO.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/app.oFX3_5v3.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/21pSE9mY.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C5Z4FKd1.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DmA_CMWa.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CWj6FrbW.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/C5XtRKzK.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/0.BUvdUzhR.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/69_IOA4Y.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DuACExjB.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/DOGHnPB-.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/NmhfbsVq.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/5.ByWbaATj.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CwwknbQU.js">
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents"><!--[--><!--[--><!----><div class="wrapper svelte-jukz7s"><header class="svelte-2vm4mj"><div class="container svelte-2vm4mj"><a class="hover logo svelte-2vm4mj" href="/"><img src="/images/icon2.jpg" alt="icon" class="svelte-2vm4mj"> <h1 class="svelte-2vm4mj">haya1007.com</h1></a> <nav class="svelte-2vm4mj"><ul class="svelte-2vm4mj"><!--[--><li><a class="hover-line hover" href="/works">works</a></li><li><a class="hover-line hover" href="/about">about</a></li><li><a class="hover-line hover" href="/blog">blog</a></li><!--]--></ul></nav></div></header><!----> <!----><!----><article><div class="base svelte-zmf29k"><div class="container svelte-zmf29k"><div class="button hover svelte-zmf29k"><a href="/blog">back</a></div> <div class="top-content svelte-zmf29k"><h1 class="title svelte-zmf29k">BINDを使ったDNSサーバーの作成</h1> <time class="date svelte-zmf29k">2025-04-27</time></div> <img class="thumbnail svelte-zmf29k" src="/images/posts/post2.png" alt=""> <div class="main-content svelte-zmf29k"><!----><p>CentOS Stream 9 でローカル内の名前解決をできるようにするDNSサーバーを建てる。<br></p> <h2>アドレス</h2> <table><thead><tr><th>サーバー種</th><th>IPアドレス</th><th>FQDN</th></tr></thead><tbody><tr><td>DGW</td><td>192.168.1.0</td><td></td></tr><tr><td>DNS</td><td>192.168.1.10</td><td>dns.haya1007.com</td></tr><tr><td>WEB</td><td>192.168.1.20</td><td>web.haya1007.com</td></tr></tbody></table> <br> <h2>BINDのインストール</h2> <pre class="language-undefined"><!----><code class="language-undefined">sudo dnf install bind bind-chroot</code><!----></pre> <p>bind-chrootは/etc/named/chrootをルート「/」にすることで、BINDを侵害されてもアクセスを制限できる。</p> <br> BINDの設定は「/etc/named.conf」で行い、ゾーンファイルを「/var/named/」に作る。 <br> <h3>/etc/named.confの設定</h3> <pre class="language-undefined"><!----><code class="language-undefined">//
@@ -132,15 +132,15 @@ domain example.com</code><!----></pre> <br> <h2>Windowsの設定（ホストPC�
 			
 			<script>
 				{
-					__sveltekit_1q9x7y0 = {
-						base: new URL("..", location).pathname.slice(0, -1)
+					__sveltekit_1bqdird = {
+						base: new URL("../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../_app/immutable/entry/start.BEa03S2O.js"),
-						import("../_app/immutable/entry/app.C8bKKVH4.js")
+						import("../../_app/immutable/entry/start.QmNW6_lw.js"),
+						import("../../_app/immutable/entry/app.oFX3_5v3.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],
