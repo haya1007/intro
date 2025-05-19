@@ -1,0 +1,1 @@
+const s=[{service:"Youtube",href:"https://www.youtube.com/@ekko-hy",path:"/images/sns/youtube.svg"},{service:"X",href:"https://x.com/pippipipiip",path:"/images/sns/x.svg"},{service:"GitHub",href:"https://github.com/haya1007",path:"/images/sns/github.svg"}];export{s};

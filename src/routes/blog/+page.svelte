@@ -37,9 +37,9 @@
         }
 
         .base {
-            padding: 0 4rem;
             display: flex;
             justify-content: center;
+            padding: 0 4rem;
 
             .container {
                 width: 100%;
