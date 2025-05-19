@@ -1,5 +1,6 @@
 <script lang="ts">
     import sns from "$lib/assets/sns-nav.json"
+    import histories from "$lib/assets/history.json"
 </script>
 
 <main>
@@ -7,21 +8,12 @@
         <div class="container">
             <h1 class="heading">Profile</h1>
             <div class="card">
-
                 <div class="intro">
                     <div class="upper">
                         <img src="/images/1745.png" alt="" />
                         <div class="title">
                             <div class="content">
-                                <div class="svgSample1">
-                                    <svg xmlns="http://www.w3.org/2000/svg">
-                                      <defs>
-                                        <text dy="0.4em" id="outTextx">InfraEngineer</text>
-                                      </defs>
-                                      <use x="50%" y="50%" xlink:href="#outTextx"></use>
-                                      <use x="50%" y="50%" xlink:href="#outTextx"></use>
-                                    </svg>
-                                </div>
+                                <p class="job-name">Beginner InfraEngineer</p>
                                 <div class="name">
                                     <h2>haya1007</h2>
                                     <p>(2002/10/07)</p>
@@ -41,16 +33,21 @@
                     </div>
                     
                 </div>
-                <div class="job">
-                    <h3 class="title">Job</h3>
-                    <p>インフラエンジニア</p>
-                    <p>わあああああああああああああああああ</p>
+                <div class="history">
+                    <h2 class="title">History</h2>
+                    {#each histories as history}
+                        <div class="history-container">
+                            <div class="history-title">
+                                <p class="history-date">{history.date}</p>
+                                <p class="history-heading">{history.heading}</p>
+                            </div>
+                            <p class="history-content">{history.content}</p>
+                        </div>
+                    {/each}
                 </div>
             </div>
         </div>
     </div>
-
-    <h1>History</h1>
 </main>
 
 <style>
@@ -58,7 +55,7 @@
         .base {
             display: flex;
             justify-content: center;
-            padding: 0 4rem;
+            padding: 4rem;
 
             .container {
                 width: 100%;
@@ -66,18 +63,8 @@
 
                 .heading {
                     margin-bottom: 1rem;
-                    color: white;
                     font-size: 4rem;
-                    letter-spacing : 4px;                /* 文字間 */
-                    text-shadow    : 
-                        4px  4px 2px #000000,
-                        -4px  4px 2px #000000,
-                        4px -4px 2px #000000,
-                        -4px -4px 2px #000000,
-                        4px  0px 2px #000000,
-                        0px  4px 2px #000000,
-                        -4px  0px 2px #000000,
-                        0px -4px 2px #000000;        /* 文字の影 */
+                    font-weight: bold;
                 }
 
                 .card {
@@ -109,31 +96,8 @@
                                     display: flex;
                                     flex-direction: column;
 
-                                    .svgSample1 {
-                                        text {
-                                            font-weight       : bold;
-                                            font-size         : 1.5rem;
-                                            font-family       : Meiryo UI;
-                                            stroke            : #000000;
-                                            fill              : #ffffff;
-                                            letter-spacing    : 3px;
-                                            text-anchor       : middle;
-                                            dominant-baseline : alphabetic;
-                                            padding-bottom: 1rem;
-                                        }
-
-                                        svg {
-                                            
-                                        }
-                                    }
-
-                                    .svgSample1 > svg > use:nth-of-type(1) {
-                                        stroke-width      : 7px;
-                                        paint-order       : stroke;
-                                        stroke-linejoin   : round ;
-                                    }
-                                    .svgSample1 > svg > use:nth-of-type(2) {
-                                        stroke-width      : 0;
+                                    .job-name {
+                                        font-size: 1.5rem;
                                     }
 
                                     .name {
@@ -171,14 +135,40 @@
                         }
                     }
 
-                    .job {
-                        padding: 2rem 8rem;
+                    .history {
+                        margin: 2rem 8rem;
 
                         .title {
                             margin-bottom: 1rem;
-                            font-size: 3rem;
+                            font-size: 4rem;
                             font-weight: bold;
 
+                        }
+
+                        .history-container {
+                            margin: 2rem 0;
+
+                            .history-title {
+                                display: flex;
+                                align-items: center;
+                                gap: 1rem;
+
+                                .history-date {
+                                    font-size: 2.25rem;
+                                    font-weight: bold;
+
+                                }
+
+                                .history-heading {
+                                    font-size: 1.75rem;
+                                    font-weight: bold;
+                                }
+                            }
+
+                            .history-content {
+                                padding-top: 0.5rem;
+                                font-size: 1.25rem;
+                            }
                         }
                     }
                 }
