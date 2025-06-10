@@ -1,7 +1,7 @@
 ---
 title: BINDを使ったDNSサーバーの作成
 date: '2025-04-27'
-image: '/images/posts/post2.png'
+image: '/images/posts/post02.png'
 ---
 
 CentOS Stream 9 でローカル内の名前解決をできるようにするDNSサーバーを建てる。<br>

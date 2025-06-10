@@ -1,0 +1,112 @@
+---
+title: MySQLのMaster-Slave構成
+date: '2025-05-21'
+image: '/images/posts/no_image.png'
+---
+
+# レプリケーション
+事前知識としてレプリケーションを紹介します。  
+レプリケーションとは、あるデータベースサーバーのデータを複製したデータベースサーバーにコピーすることです。  
+基本的には、データベースの冗長化や負荷分散のために用いられます。  
+
+詳細は[こちら](https://dev.mysql.com/doc/refman/8.0/ja/replication.html, "MySQL レプリケーション")
+
+<br>
+
+# Master-Slave構成
+　Master-Slave構成はレプリケーションのひとつで、Masterに書き込まれたらSlaveに同期します。
+なので、Slaveは通常読み込み専用として利用されます。
+
+　近年、Githubでもmasterは奴隷制度を連想させるという理由でmainにブランチ名が統一されてきておりますが、master-slaveもMySQLで設定する際、**「Source」**などの言葉に置き換えれれているようです。
+
+この構成を利用することで、MySQLデータベースサーバーの冗長化や負荷分散などを行えるようになります。  
+
+<br> 
+
+# スプリットブレインシンドローム
+　Master-Slave構成などのレプリケーションを使用する際に知っておくべき現象です。
+こういったレプリケーションは同期していますが、もし両者をつなぐネットワークが障害で落ちてしまったらどうなるでしょうか。
+
+Slaveが「おれがMasterだ！」と言い出します。  
+もしその状態で復旧したら、Masterが複数台存在することになってしまいます。そうすると、データの送信などがあらゆるデータベース間で発生しデータの破損などにつながってしまうのです、、
+おそろしいですね。
+
+<br>
+
+それを解決するために**クォーラム(Quorum)**というものがあります。
+これは多数決で動作を決めるもので、(1 / 2 + 1)よりも数が少ないクラスタはダウンするというものです。
+
+であるため、基本的に奇数台のデータベースサーバーを構築することが推奨されます。
+
+<br>
+
+# 実装
+### Master
+MySQLの設定ファイルを開きます。
+```
+sudo vi /etc/my.conf        // versionによって別のところにある場合もある。
+```
+
+下記を入力します。Masterは**id=1**です。
+```
+[mysqld]
+server-id=1
+log-bin=mysql-bin
+```
+
+次にmysqlのコンソールを開きます。
+```
+mysql -u root -p        // パスワードが不要の場合は「-p」はいらない
+```
+
+replユーザーを作成します。passwordなどは任意で変更してください。
+```
+CREATE USER'repl'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
+FLUSH PRIVILEGES;
+SHOW MASTER STATUS 
+→表示されたバイナリログファイルとそのポジションをメモしておく（Slaveで使います）
+EXIT
+```
+
+もし、ファイアウォールを使われている方がいたらSlaveのサーバーのIPアドレスに対して3306番を通れるようにしておいてください。
+
+### Slave
+Slaveでも同様にmy.confを開きます。
+```
+sudo vi /etc/my.conf
+```
+
+以下を記入します。
+```
+[mysqld]
+server-id=2         // MasterやほかのSlaveと被らないように
+```
+
+こちらでもファイアウォールを使われている方はMasterのアドレスに対し3306番を開放してください。
+
+MySQLのコンソールを開きます。
+```
+mysql -u root -p
+```
+
+slaveの設定をしていきます。
+```
+CHANGE REPLICATION SOURCE TO
+    SOURCE_HOST='Masterのアドレスorドメイン',
+    SOURCE_USER='repl',
+    SOURCE_PASSWORD='password',
+    SOURCE_LOG_FILE='メモしたバイナリログファイルの名前',
+    SOURCE_LOG_POS=メモしたバイナリログファイルのポジション; （シングルコーテーションいらない）
+```
+
+問題なく追加ができたら
+```
+START SLAVE;
+
+SHOW SLAVE STATUS;
+→ エラーはいてないか確認
+```
+
+これでMasterとSlaveの設定は終わりです。
+エラーをはいていなかったら同期されています。

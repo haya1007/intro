@@ -1,0 +1,105 @@
+---
+title: SELinuxのコンテキストラベル
+date: '2025-05-20'
+image: '/images/posts/post03.png'
+---
+
+# SELinuxとは
+Security-Enhanced Linuxの略です。RedHatの公式ページには
+> システムにアクセスできるユーザーを管理者がよりきめ細かく制御するための、Linux® システム向けセキュリティ・アーキテクチャです。
+> もともとは、Linux Security Modules (LSM) を使用した Linux カーネルへの一連のパッチとして、アメリカ国家安全保障局 (NSA) によって開発されました。  
+SELinux は 2000 年にオープンソース・コミュニティにリリースされ、2003 年にアップストリームの Linux カーネルに統合されました。
+
+と定義されています。
+<br>
+SELinuxは、Linux上で動作するプロセスからファイルに対するアクセス制限を定義するのが主な機能で、「強制アクセス制御」と呼ばれた方式をとっている。  
+
+**・参考リンク**  
+https://www.redhat.com/ja/topics/linux/what-is-selinux
+
+<br>
+
+## 強制アクセス制御とは
+MAC（Mandatory Access Control）と呼ばれるもので、MACはrootユーザーでも設定以上の特権は与えません。（Linuxシステムでは通常rootユーザーはすべてのファイルにアクセスできる）  
+ちなみに、Linuxシステムのアクセス制御のシステムは任意アクセス制御（DAC）という。  
+<br>
+MACでは、管理目的でポリシーが設定されており、DAC設定が変更されてもMACでディレクトリにアクセスできないようにSELinuxポリシーが設定されていたらアクセスできません。  
+なので、時々システム構築の際にSELinuxを無効化する必要があるのは、そのアクセス制限で一部のシステムが正常に動作しない可能性があるからです。  
+
+<br><br>
+
+## モード
+### Enforcing
+デフォルトのモードで推奨されるモードで、 読み込んだセキュリティポリシーをシステム全体に強制する。
+
+<br>
+
+### Permissive
+オブジェクトのラベリングやアクセスを拒否したとき、ログにそのことを出力しますが、実際にはアクセスはブロックされません。開発やデバッグに有効なモードです。
+
+<br>
+
+### Disabled
+SELinuxポリシーを完全に無効化します。
+
+<br>
+
+## コマンド紹介
+### ・sestatus
+SELinuxの有効/無効、現在のモードなどを確認できる。
+```
+// 無効な場合
+[haya1007@Test-Server ~]$ sestatus
+SELinux status:                 disabled
+```
+
+```
+// 有効の場合
+[haya1007@Test-Server ~]$ sestatus
+SELinux status:                 enabled
+SELinuxfs mount:                /selinux
+Current mode:                   enforcing
+Mode from config file:          enforcing
+Policy version:                 24
+Policy from config file:        targeted
+```
+
+<br>
+
+### ・setenforce [モード]
+一時的にモードを切り替える。再起動で元に戻る。
+```
+# Enforcing にする
+sudo setenforce 1
+
+# Permissive にする
+sudo setenforce 0
+```
+
+<br>
+
+※永続的にモードを切り替えする場合  
+
+「/etc/selinux/config」の`SELINUX=`にモード名を記載することで切り替えができる。
+
+<br>
+
+### ・ls -Z
+ファイルのコンテキストを確認できるコマンド。
+
+### restorecon [パス]
+コンテキストを修正するコマンド。
+
+<br>
+
+## 以前あった不具合
+/var/www/html内にindex.htmlがあるのに、サイトにアクセスすると「Access Denied」と表示されたことがある。  
+これは、そのファイルのコンテキストの設定によりSELinuxがアクセスを制限していたことが原因だった。
+
+そこで、`sudo restorecon -Rv /var/www/html`を実行することで、適切なコンテキストに修正され、問題なくアクセスすることができた。  
+
+※「httpd_sys_content_t」がコンテキストにないとapacheでは読み込めない。
+
+<br>
+
+<br>

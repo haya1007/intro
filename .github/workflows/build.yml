@@ -29,6 +29,10 @@ jobs:
       - name: Install svelte-splide
         run: npm install @splidejs/svelte-splide
 
+      # @splidejs/svelte-reveal をインストール
+      - name: Install svelte-reveal
+        run: npm i -D svelte-reveal
+
       # ビルドコマンドを実行
       - name: Build Svelte App
         run: npm run build

@@ -8,7 +8,6 @@
     <div class="base">
         <div class="container">
             <h1 class="heading">Blog</h1>
-
             <ul class="list">
                 {#each data.blog as post}
                     <a class="hover" href={post.path}>
@@ -19,7 +18,7 @@
                                     {post.title}
                                 </h2>
                                 <time>
-                                    {post.date}
+                                    最終更新日：{post.date}
                                 </time>
                             </div>
                         </li>
@@ -55,14 +54,28 @@
                         margin: 1rem 0;
                         border: 2px solid #000000;
                         border-radius: 1rem;
+                        transition: border .05s;
+
+                        &:hover {
+                            border: 5px solid #000000;
+                        }
 
                         .thumbnail {
                             width: 100%;
                             border-radius: 1rem 1rem 0 0;
+                            border-bottom: 1px solid #000;
                         }
 
                         .content {
                             padding: 1rem;
+
+                            h2 {
+                                font-size: 1.1rem;
+                                font-weight: bold;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
                         }
                     }
                 }

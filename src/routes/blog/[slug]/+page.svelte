@@ -18,7 +18,7 @@
             <div class="main-content">
                 <svelte:component this={data.content} />
             </div>
-            <div class="button hover">
+            <div class="button hover btn-bottom">
                 <a href="/blog">back</a>
             </div>
         </div>
@@ -62,11 +62,11 @@
     }
 
     .title {
-        font-size: 2rem;
+        font-size: 2.25rem;
     }
 
     .date {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .thumbnail {
@@ -76,35 +76,37 @@
         margin-bottom: 1rem;
     }
 
+    .btn-bottom {
+        margin-top: 4rem;
+    }
+
     :global(.main-content) {
+
         :global(h1) {
             margin: 1rem 0;
-            font-size: 2rem;
+            font-size: 2.25rem;
+            border-bottom: 1px solid #5b5b5b;
         }
 
         :global(h2) {
             margin: 1rem 0;
-            font-size: 1.75rem;
+            font-size: 2rem;
             border-bottom: 1px solid #5b5b5b;
         }
 
         :global(h3) {
             margin: 1rem 0;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
         }
 
         :global(h4) {
             margin: 1rem 0;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
         }
 
         :global(h5) {
             margin: 1rem 0;
-            font-size: 1rem;
-        }
-
-        :global(p) {
-            margin: 1rem 0;
+            font-size: 1.25rem;
         }
 
         :global(li) {
@@ -143,7 +145,8 @@
 
         :global(p) {
             width: 100%;
-            margin: 0.5rem 0;
+            margin: 1rem 0;
+            font-size: 1.1rem;
 
             :global(code) {
                 width: 100%;
@@ -163,6 +166,11 @@
         :global(a) {
             color: rgb(80, 80, 232);
             text-decoration: underline;
+
+            &:hover {
+                color: #dc6688;
+                text-decoration: inherit;
+            }
         }
 
         :global(blockquote) {

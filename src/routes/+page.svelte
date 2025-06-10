@@ -2,6 +2,8 @@
     import data from '$lib/assets/global-nav.json';
     import images from '$lib/assets/first-view.json';
 
+    import { reveal } from 'svelte-reveal';
+
     import Splide from '@splidejs/splide';
     import '@splidejs/svelte-splide/css';
 
@@ -19,7 +21,7 @@
             pauseOnHover: false,
             pauseOnFocus: false,
             resetProgress: false,
-            interval: 1000
+            interval: 2000
         };
 
         const { Autoplay } = splide.Components;
@@ -60,7 +62,7 @@
                         <img src="/images/haikei.jpg" alt="" />
                         <p>{item.description}</p>
                     </div>
-                    <div class="button hover">
+                    <div class="button">
                         <a href={item.href}>view all</a>
                     </div>
                 </div>
@@ -127,9 +129,20 @@
 
                 a {
                     padding: 0.5rem 1rem;
+                    font-weight: bold;
                     border: 1px solid;
                     border-radius: 1rem;
-                    background-color: orange;
+                    background-color: rgb(255, 166, 0);
+                    box-shadow: 0 6px 0 rgb(121, 78, 0), 0 12px 0 rgba(0,0,0,.2);
+                    transition: color .3s, background-color .3s, box-shadow .3s, transform 0.3s;
+
+                    &:hover {
+                        color: white;
+                        background: rgb(255, 190, 69);
+                        box-shadow: 0 3px 0 rgb(116, 85, 28), 0 6px 0 rgba(0,0,0,.2);
+                        transform: translateY(3px);
+                        transition-duration: .1s;
+                    }
                 }
             }
         }
