@@ -7,7 +7,7 @@
     {
         "href": "/works",
         "text": "works",
-        "description": "過去の実績です。"
+        "description": "過去の実績です。作成中"
     },
     {
         "href": "/blog",
@@ -17,6 +17,6 @@
     {
         "href": "/learning",
         "text": "learning",
-        "description": "学習状況です。"
+        "description": "学習状況です。作成中"
     }
 ]
